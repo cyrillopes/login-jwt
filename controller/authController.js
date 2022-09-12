@@ -29,14 +29,14 @@ router.post("/register", (req, res) => {
       role: req.body.role ? req.body.role : "User",
     },
     (err, data) => {
-      if (err) return res.send("Error While Register");
+      if (err) return res.send("Error While Registering");
       res.send("Registration Successful");
     }
   );
 });
 router.post("/login", (req, res) => {
   User.findOne({ email: req.body.email }, (err, user) => {
-    if (err) return res.send({ auth: false, token: "Error While Logging" });
+    if (err) return res.send({ auth: false, token: "Error logging" });
     if (!user) return res.send({ auth: false, token: "No User Found" });
     else {
       const passIsValid = bcrypt.compareSync(req.body.password, user.password);
